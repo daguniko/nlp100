@@ -1,0 +1,7 @@
+#!/bin/bash
+
+age1 = "18"
+age2 = 20
+family  = 須崎
+name = 潤一
+echo "私の名前は${family}で、名前は${name}です"

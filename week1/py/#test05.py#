@@ -1,0 +1,19 @@
+#! /usr/bin/python
+# -*-coding:utf-8-*-
+# (5) ’¼«’Á³’¿ôN’¤ò’¥³’¥Þ’¥ó’¥É’¥é’¥¤’¥ó’°ú’¿ô’¤Ë’¤È’¤ê’¡¤’Æþ’ÎÏ’¤Î’¤¦’¤Á’Àè’Æ¬’¤ÎN’¹Ô’¤À’¤±’¡¥’³Î’Ç§’¤Ë’¤Ïhead’¥³’¥Þ’¥ó’¥É’¤ò’ÍÑ’¤¤’¤è’¡¥
+
+import sys
+import numbers
+f = open(u'../data/address.txt','r').readlines()
+
+#error handling
+if len(sys.argv) == 1:
+    sys.argv.append(10)
+elif len(sys.argv) > 2:
+    print "’Âè’°ì’°ú’¿ô’¤Î’¤ß’¤ò’Æþ’ÎÏ’¤ò’¤·’¤Æ’¤¯’¤À’¤µ’¤¤’¡£"
+    sys.exit()
+
+for line in f[0:int(sys.argv[1])]:
+    item = line[:-1].split('\n')
+    print item[0]
+

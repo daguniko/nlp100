@@ -1,0 +1,16 @@
+#! /Users/sudo/.virtualenvs/hoge/bin/python2
+# -*-coding:utf-8-*-
+
+from collections import Counter
+f = open(u"../data/medline.txt.sent.tok.stem").readlines()
+
+list = []
+for line in f:
+    line = line.split()
+    list.append(line[1])
+
+# 全連結の組み合わせ
+print len(list) - 1
+
+
+

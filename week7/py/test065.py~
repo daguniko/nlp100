@@ -1,0 +1,84 @@
+#! /Users/sudo/.virtualenvs/hoge/bin/python2
+# -*-coding:utf-8-*-
+#(65) 64のリストに含まれる名詞句に対し，その名詞句に係る文節・その名詞句が係る文節の単語（周辺単語と呼ぶ）を出力するプログラムを実装せよ．周辺単語は名詞，動詞，形容詞の基本形とせよ．出力形式は，"(名詞句)\t(方向) (周辺単語)"とし，名詞句に係る文節では「方向」を"<-"とし，名詞句が係る文節では「方向」を"->"とせよ．以降，「方向」と「周辺単語」を組み合わせたものを，名詞句の「文脈」と呼ぶ．
+
+#regular expression part
+import CaboCha
+import os
+import re
+from collections import defaultdict
+
+#set cabocha
+c = CaboCha.Parser("-f1")
+files = os.listdir("../data/cabocha/");
+readfile = []
+for file in files:
+    if ".n" in file:
+        continue
+    elif "log.txt" in file:
+        continue
+    else:
+        readfile.append(file)
+
+one_sent = []
+all_sent_list = []
+kakari_dict = defaultdict(list)
+chunk = [[]]
+import re
+
+for file in readfile:
+    f = open(u"../data/cabocha/" + file).readlines()
+    previtem = ""
+    for line in f:
+        if "* " in line:
+            w = re.split(r" |/",line.strip())
+            w[2] = w[2][:-1]
+            chunk.append([w[1],[],"",w[2],[],"",""])
+            one_chunk = chunk[-1]
+            print chunk[-1]
+            kakari_dict[w[2]].append(w[1])
+            one_sent.append(one_chunk)
+            i = 0
+            print "aiueo"
+
+        elif "\t" in line:
+            item = re.split(r"\t|",line.strip())
+            one_chunk.append("aiueo")
+            print one_chunk
+            one_chunk[1].append([item[0],item[7],item[1],item[2]])
+
+
+            if item[1] != "記号":
+                one_chunk[2] = one_chunk + item[0]
+
+            if i == int(w[3]):
+                if item[7] == "*":
+                    item[7] = item[0]
+                one_chunk[5] = item[7]
+                one_chunk[6] = item[1]
+            i+=1
+
+        elif "EOS" in line:
+            for one_chunk in one_sent:
+                one_chunk[4] = kakari_dict[one_chunk[0]]
+                all_sent_list.append(one_sent)
+                one_sent = []
+                kakari_dict = defaultdict(list)
+
+
+
+#MeCab part
+#print readlist
+
+
+# for readfile in readlist:
+#     f = open(u"../data/cabocha/" + readfile).readlines()
+#     previtem = ""
+#     for line in f:
+#         if "\t" in line:
+#             item = re.split(r"\t|,",line.strip())
+#             if previtem == "名詞" and item[1] == "名詞":
+#                 print prevline + item[0]
+#                 f2.write(prevline+item[0] + "\n")
+#             prevline = item[0]
+#             previtem = item[1]

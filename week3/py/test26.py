@@ -1,0 +1,24 @@
+#! /usr/bin/python
+# -*-coding:utf-8-*-
+#(24) (23)のプログラムを修正し，各トークンの末尾が記号で終わる場合は，その記号を別のトークンとして分離せよ．
+
+import re
+re_se = re.compile(r".+ness|.+ly")
+f = open("../data/medline.txt.sent.tok").readlines()
+
+for line in f:
+    match = re_se.search(line.strip())
+
+    if match:
+        line = line.split()
+        print line[0]
+
+    # 簡潔版
+    # if line.find("ness") >= 0:
+    #     print line
+    # if line.find("ly") >= 0:
+    #     print line
+
+    #コンパイルなしで正規表現検索
+    #サーチとマッチの関数の違いはなんなの？
+    # m = re.search(r".+ness|.+ly",line.strip())

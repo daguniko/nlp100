@@ -1,0 +1,16 @@
+#! /usr/bin/python
+# -*-coding:utf-8-*-
+#(17) 人名らしき表現にマッチする正規表現を各自で設計し，抽出せよ．（例えば「さん」「氏」「ちゃん」などの接尾辞に着目するとよい）
+
+import re
+f = open(u"../data/tweet.txt")
+for line in f:
+    match = re.search(u".{2,8}[さん|君|ちゃん|氏|どの]",line)
+    if match:
+        line = match.group()
+        print line
+    match2 = re.search(u"(一-龠|あ-ん)さん",line)
+    if match2:
+        line = match2.group()
+        print line
+

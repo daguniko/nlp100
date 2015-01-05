@@ -1,0 +1,18 @@
+#! /Users/sudo/.virtualenvs/hoge/bin/python2
+# -*-coding:utf-8-*-
+#(30) (25)の出力を標準入力から読み込み，stemming.porter2を用いて語幹（ステム）を最終列に追加し，medline.txt.sent.tok.stemというファイルに保存せよ．
+from stemming.porter2 import stem
+
+f = open(u"../data/medline.txt.sent.tok").readlines()
+f2 = open(u"../data/medline.txt.sent.tok.stem","w")
+
+#空白行を確認するやり方としてisStringEmptyを試したが、ダメだったので、len(line)。しかも、空白行のところにスペースみたいな文字が複数あってなかなか取りづらかった。
+#stripコマンドで普通に解決。アホか。
+for line in f:
+    line = line.strip()
+    if len(line) == 0:
+        continue
+    elif len(line) >= 1:
+        magiclist = line.split()
+        magiclist.append(stem(magiclist[1]))
+        f2.write(magiclist[0] +"\t"+ magiclist[1] +"\t"+ magiclist[2]+"\n")

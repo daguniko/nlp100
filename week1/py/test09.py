@@ -1,0 +1,19 @@
+#! /usr/bin/python
+# -*-coding:utf-8-*-
+#(9) 各行を２コラム目，１コラム目の優先順位で辞書の逆順ソートしたもの（注意: 各行の内容は変更せずに並び替えよ）．確認にはsortコマンドを用いよ（この問題は結果が合わなくてもよい）．
+
+
+f = open(u'../data/address2.txt').readlines()
+charlist = []
+charlist2 = []
+for line in f:
+    itemline = line[:-1].split('\t')
+    charlist.append(itemline[0])
+    charlist2.append(itemline[-1])
+
+charlist3 = zip(charlist,charlist2)
+
+charlist3.sort(key = lambda t:(t[1],t[0]))
+
+for a,b in charlist3:
+    print a + "\t" + b

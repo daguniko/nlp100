@@ -1,0 +1,35 @@
+#! /Users/sudo/.virtualenvs/hoge/bin/python2
+# -*-coding:utf-8-*-
+#(51) 日本語の文章をCaboChaで係り受け解析し，ラティス形式（-f1オプション）の解析結果を得よ．
+import CaboCha
+import re
+c = CaboCha.Parser("-f1")
+f = open(u"../data/japanese.txt").readlines()
+
+class Morph:
+    def __init__(self,surface,base,pos,pos1):
+        self.surface = surface
+        self.base = base
+        self.pos = self.pos
+        self.pos1 = self.pos1
+
+def test052():
+    all_list = []
+    one_list = []
+    for line in f:
+        tree = c.parse(line)
+        print tree.toString(CaboCha.FORMAT_LATTICE)
+
+        if "\t" in line:
+            item = re.split(r"\t|,",line.strip())
+            one_list.append(Morph(item[0],item[7],item[1],item[2]))
+        elif "EOS" in line:
+            for item in one_list:
+                print "surface=%s\tbase=%s\tpos=%s\tpos1=%s" % (item.surface,item.base,item.pos,item.pos1)
+                all_list.append(one_list)
+                print "EOS"
+                one_list=[]
+
+if __name__  == "__main__":
+    test052()
+

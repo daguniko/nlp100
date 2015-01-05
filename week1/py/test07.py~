@@ -1,0 +1,26 @@
+#! /usr/bin/python
+# -*-coding:utf-8-*-
+#(7) １コラム目の文字列の異なり数（種類数）．確認にはcut, sort, uniq, wcコマンドを用いよ．
+#-文字コードについて正確に理解しよう
+
+import sys
+f = open(u'address2.txt','r').readlines()
+itemlist2 = []
+for line in f:
+    itemlist = line[:-1].split('\t')
+    itemlist2.append(itemlist[0])
+
+#print "重複した行を削除するなり"
+
+itemlist2 = list(set(itemlist2))
+
+#print "sortするだに"
+
+itemlist2.sort()
+for line in range(int(len(itemlist2))):
+    print itemlist2[line]
+
+
+#    print charlist2
+#    print len(charlist) / 3
+    
