@@ -29,6 +29,7 @@ import re
 for file in readfile:
     f = open(u"../data/cabocha/" + file).readlines()
     previtem = ""
+
     for line in f:
         if "* " in line:
             w = re.split(r" |/",line.strip())
